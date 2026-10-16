@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faraz & Anam - Wedding Invitation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Elegant Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .font-serif-title { font-family: 'Cinzel', serif; }
+        .font-script { font-family: 'Great Vibes', cursive; }
+        .font-body { font-family: 'Montserrat', sans-serif; }
+        
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+
+        /* Scratch Card Canvas styling */
+        #scratchCanvas {
+            touch-action: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-stone-900 text-stone-100 font-body antialiased flex flex-col items-center justify-center min-h-screen p-0 sm:p-4">
+
+    <!-- Mobile-First Web Card Container -->
+    <main class="w-full max-w-md bg-gradient-to-b from-red-950 via-stone-900 to-amber-950 text-amber-100 shadow-2xl relative overflow-hidden border border-amber-500/20 sm:rounded-3xl">
+
+        <!-- SECTION 1: Cover Screen (Tap To Open) -->
+        <section id="cover" class="min-h-screen flex flex-col items-center justify-between p-8 text-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-900 via-stone-900 to-black relative">
+            <div class="mt-8">
+                <p class="text-amber-300/80 text-sm tracking-widest uppercase font-light">With the blessings of</p>
+                <p class="text-amber-200 text-base font-serif-title mt-1">Mr. & Mrs. Shakeel David</p>
+            </div>
+
+            <div class="my-auto py-12">
+                <h2 class="text-amber-400 font-script text-5xl mb-2">Faraz Shakeel</h2>
+                <span class="text-amber-200/60 font-serif-title italic text-xl">&</span>
+                <h2 class="text-amber-400 font-script text-5xl mt-2">Anam Elahi</h2>
+            </div>
+
+            <div class="mb-10 w-full">
+                <button onclick="document.getElementById('blessings').scrollIntoView({behavior: 'smooth'})" 
+                        class="w-full py-4 px-6 rounded-full border border-amber-400/50 bg-amber-500/10 text-amber-300 font-serif-title tracking-widest text-sm hover:bg-amber-500/20 transition-all duration-300 animate-pulse shadow-lg shadow-amber-900/40">
+                    TAP TO OPEN
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Scripture & Verse -->
+        <section id="blessings" class="py-16 px-8 text-center border-t border-amber-500/10 bg-stone-900/80">
+            <div class="inline-block p-2 border-b border-amber-500/30 mb-6">
+                <p class="text-amber-400 font-serif-title text-xs tracking-widest uppercase">HOLY BIBLE</p>
+            </div>
+            
+            <blockquote class="italic text-amber-100/90 font-serif-title text-base leading-relaxed mb-4">
+                "I have found the one whom my soul loves."
+            </blockquote>
+            <p class="text-amber-400/80 text-xs tracking-wider uppercase mb-8">— Song of Solomon 3:4</p>
+
+            <blockquote class="italic text-amber-100/80 text-xs leading-relaxed max-w-xs mx-auto border-t border-amber-500/10 pt-6">
+                "May your love be nurtured by His wisdom and sustained by His strength. Let this union be a testament to the love you share and the faith you hold."
+            </blockquote>
+        </section>
+
+        <!-- SECTION 3: Interactive Scratch To Reveal Date -->
+        <section class="py-12 px-6 text-center border-t border-amber-500/10 bg-gradient-to-b from-stone-900 to-red-950">
+            <h3 class="text-amber-400 font-serif-title text-xs tracking-widest uppercase mb-4">A Date To Hold Close</h3>
+            
+            <div class="relative w-72 h-40 mx-auto rounded-xl overflow-hidden shadow-2xl border border-amber-500/30">
+                <!-- Hidden Reveal Content beneath Scratch Layer -->
+                <div class="absolute inset-0 bg-red-950 flex flex-col items-center justify-center p-4 text-amber-200">
+                    <p class="text-xs uppercase tracking-widest text-amber-400">Save The Date</p>
+                    <p class="font-serif-title text-2xl font-bold text-amber-300 my-1">NOV 12 - 15</p>
+                    <p class="text-xs text-amber-200/80">2026 • Lahore, Pakistan</p>
+                </div>
+                <!-- Interactive Scratch Canvas -->
+                <canvas id="scratchCanvas" class="absolute inset-0 w-full h-full z-10"></canvas>
+            </div>
+            <p class="text-amber-400/60 text-xs mt-3">Rub/Scratch above to reveal the dates</p>
+        </section>
+
+        <!-- SECTION 4: Live Countdown -->
+        <section class="py-12 px-6 text-center bg-stone-950 border-t border-amber-500/10">
+            <h3 class="text-amber-400 font-serif-title text-xs tracking-widest uppercase mb-6">Counting Every Heartbeat</h3>
+            <div id="countdown" class="grid grid-cols-4 gap-2 text-center max-w-xs mx-auto">
+                <div class="bg-amber-950/40 p-3 rounded-lg border border-amber-500/20">
+                    <span id="days" class="block font-serif-title text-2xl text-amber-300">00</span>
+                    <span class="text-[10px] uppercase text-amber-400/60">Days</span>
+                </div>
+                <div class="bg-amber-950/40 p-3 rounded-lg border border-amber-500/20">
+                    <span id="hours" class="block font-serif-title text-2xl text-amber-300">00</span>
+                    <span class="text-[10px] uppercase text-amber-400/60">Hours</span>
+                </div>
+                <div class="bg-amber-950/40 p-3 rounded-lg border border-amber-500/20">
+                    <span id="minutes" class="block font-serif-title text-2xl text-amber-300">00</span>
+                    <span class="text-[10px] uppercase text-amber-400/60">Mins</span>
+                </div>
+                <div class="bg-amber-950/40 p-3 rounded-lg border border-amber-500/20">
+                    <span id="seconds" class="block font-serif-title text-2xl text-amber-300">00</span>
+                    <span class="text-[10px] uppercase text-amber-400/60">Secs</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Wedding Events Program -->
+        <section class="py-12 px-6 border-t border-amber-500/10 bg-stone-900">
+            <h3 class="text-amber-400 font-serif-title text-xs tracking-widest uppercase text-center mb-8">Wedding Events</h3>
+
+            <div class="space-y-6">
+                <!-- Event 1: Rasm-e-Heena -->
+                <div class="bg-gradient-to-r from-pink-950/40 to-stone-900 p-5 rounded-2xl border border-pink-500/30 shadow-lg">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-pink-400 font-semibold">Thursday</span>
+                            <h4 class="font-script text-3xl text-pink-200">Rasm-e-Heena</h4>
+                        </div>
+                        <span class="text-xs bg-pink-900/60 text-pink-200 px-3 py-1 rounded-full border border-pink-500/30">12 NOV 2026</span>
+                    </div>
+                    <p class="text-xs text-stone-300 mt-2">6:00 PM onwards</p>
+                    <p class="text-xs font-semibold text-amber-200 mt-1">Pearl Palace Events Complex</p>
+                    <p class="text-[11px] text-stone-400">Pecco Road Pindi Stop, Lahore</p>
+                    <a href="https://maps.google.com/?q=Pearl+Palace+Events+Complex+Pecco+Road+Lahore" target="_blank" class="inline-block mt-3 text-[11px] text-amber-400 underline underline-offset-4">View Location on Map →</a>
+                </div>
+
+                <!-- Event 2: Nikkah Ceremony -->
+                <div class="bg-gradient-to-r from-purple-950/40 to-stone-900 p-5 rounded-2xl border border-purple-500/30 shadow-lg">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-purple-400 font-semibold">Friday</span>
+                            <h4 class="font-script text-3xl text-purple-200">Nikkah Ceremony</h4>
+                        </div>
+                        <span class="text-xs bg-purple-900/60 text-purple-200 px-3 py-1 rounded-full border border-purple-500/30">13 NOV 2026</span>
+                    </div>
+                    <p class="text-xs text-stone-300 mt-2">1:00 PM</p>
+                    <p class="text-xs font-semibold text-amber-200 mt-1">Sacred Heart of Jesus Cathedral</p>
+                    <p class="text-[11px] text-stone-400">Regal Chowk Mall Road, Lahore</p>
+                    <a href="https://maps.google.com/?q=Sacred+Heart+of+Jesus+Cathedral+Mall+Road+Lahore" target="_blank" class="inline-block mt-3 text-[11px] text-amber-400 underline underline-offset-4">View Location on Map →</a>
+                </div>
+
+                <!-- Event 3: Baraat & Sehra Bandi -->
+                <div class="bg-gradient-to-r from-red-950/60 to-stone-900 p-5 rounded-2xl border border-red-500/30 shadow-lg">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-red-400 font-semibold">Saturday</span>
+                            <h4 class="font-script text-3xl text-red-200">Sehra Bandi & Reception</h4>
+                        </div>
+                        <span class="text-xs bg-red-900/60 text-red-200 px-3 py-1 rounded-full border border-red-500/30">14 NOV 2026</span>
+                    </div>
+                    <p class="text-xs text-stone-300 mt-2">Sehra Bandi: 4:00 PM | Departure: 6:00 PM</p>
+                    <p class="text-xs font-semibold text-amber-200 mt-1">Empire Hall (Hall #1 & 2)</p>
+                    <p class="text-[11px] text-stone-400">Garrison Golf Club, Saddar Town, Lahore</p>
+                    <a href="https://maps.google.com/?q=Garrison+Golf+Club+Saddar+Town+Lahore" target="_blank" class="inline-block mt-3 text-[11px] text-amber-400 underline underline-offset-4">View Location on Map →</a>
+                </div>
+
+                <!-- Event 4: Walima -->
+                <div class="bg-gradient-to-r from-amber-950/40 to-stone-900 p-5 rounded-2xl border border-amber-500/30 shadow-lg">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-[10px] uppercase tracking-widest text-amber-400 font-semibold">Sunday</span>
+                            <h4 class="font-script text-3xl text-amber-200">Walima Ceremony</h4>
+                        </div>
+                        <span class="text-xs bg-amber-900/60 text-amber-200 px-3 py-1 rounded-full border border-amber-500/30">15 NOV 2026</span>
+                    </div>
+                    <p class="text-xs text-stone-300 mt-2">7:00 PM</p>
+                    <p class="text-xs font-semibold text-amber-200 mt-1">Pearl Event Complex</p>
+                    <p class="text-[11px] text-stone-400">Pecco Road Pindi Stop, Lahore</p>
+                    <a href="https://maps.google.com/?q=Pearl+Event+Complex+Pecco+Road+Lahore" target="_blank" class="inline-block mt-3 text-[11px] text-amber-400 underline underline-offset-4">View Location on Map →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: RSVP Form -->
+        <section class="py-12 px-6 border-t border-amber-500/10 bg-stone-950">
+            <h3 class="text-amber-400 font-serif-title text-xs tracking-widest uppercase text-center mb-2">Will You Join Us?</h3>
+            <p class="text-center text-xs text-stone-400 mb-6">Kindly respond to confirm your presence</p>
+
+            <form onsubmit="event.preventDefault(); alert('Thank you for confirming your attendance!');" class="space-y-4">
+                <div>
+                    <label class="block text-[11px] uppercase tracking-wider text-amber-300/80 mb-1">Full Name</label>
+                    <input type="text" required placeholder="Your Name" class="w-full bg-stone-900 border border-amber-500/30 rounded-lg px-4 py-2 text-sm text-stone-100 focus:outline-none focus:border-amber-400">
+                </div>
+                <div>
+                    <label class="block text-[11px] uppercase tracking-wider text-amber-300/80 mb-1">Number of Guests</label>
+                    <select class="w-full bg-stone-900 border border-amber-500/30 rounded-lg px-4 py-2 text-sm text-stone-100 focus:outline-none focus:border-amber-400">
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">Family</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[11px] uppercase tracking-wider text-amber-300/80 mb-1">Message for Couple</label>
+                    <textarea rows="3" placeholder="Warm wishes..." class="w-full bg-stone-900 border border-amber-500/30 rounded-lg px-4 py-2 text-sm text-stone-100 focus:outline-none focus:border-amber-400"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-amber-600 hover:bg-amber-500 text-stone-950 font-serif-title text-xs tracking-widest font-bold uppercase rounded-lg transition-colors shadow-lg">
+                    Send RSVP
+                </button>
+            </form>
+        </section>
+
+        <!-- SECTION 7: R.S.V.P Contacts & Host Info -->
+        <section class="py-12 px-6 border-t border-amber-500/10 bg-stone-900 text-center">
+            <h3 class="text-amber-400 font-serif-title text-xs tracking-widest uppercase mb-6">Hosts & Contacts</h3>
+
+            <div class="grid grid-cols-2 gap-4 text-left text-xs mb-8">
+                <div class="bg-amber-950/20 p-4 rounded-xl border border-amber-500/10">
+                    <p class="text-amber-400 font-semibold mb-1">Looking Forward</p>
+                    <ul class="text-stone-300 space-y-1 text-[11px]">
+                        <li>Ammar Javed</li>
+                        <li>Sameer Javed</li>
+                        <li>Amar Javed</li>
+                        <li>Asim Aftab</li>
+                        <li>Araiz Aftab</li>
+                        <li>Arbaz Aftab</li>
+                    </ul>
+                </div>
+                <div class="bg-amber-950/20 p-4 rounded-xl border border-amber-500/10">
+                    <p class="text-amber-400 font-semibold mb-1">R.S.V.P</p>
+                    <ul class="text-stone-300 space-y-1 text-[11px]">
+                        <li>Patras Pervaiz</li>
+                        <li>Aftab Khan</li>
+                        <li>Dr. Nouman Pervaiz</li>
+                        <li>Asmaar Shakeel</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="text-amber-300 font-script text-3xl">We can't wait to celebrate with you!</p>
+            <p class="text-[10px] text-stone-500 mt-6 uppercase tracking-widest">Faraz Shakeel & Anam Elahi • 2026</p>
+        </section>
+    </main>
+
+    <!-- JavaScript for Scratch Canvas & Countdown -->
+    <script>
+        // 1. Scratch Card Effect Logic
+        const canvas = document.getElementById('scratchCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        // Cover fill for scratch area
+        ctx.fillStyle = '#b45309'; // Gold/Amber Scratch foil
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Canvas Label
+        ctx.fillStyle = '#fef3c7';
+        ctx.font = '14px Montserrat';
+        ctx.textAlign = 'center';
+        ctx.fillText('SCRATCH HERE WITH FINGER', canvas.width / 2, canvas.height / 2 + 5);
+
+        let isScratching = false;
+
+        function scratch(e) {
+            if (!isScratching) return;
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x, y, 20, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        canvas.addEventListener('mousedown', () => isScratching = true);
+        canvas.addEventListener('mouseup', () => isScratching = false);
+        canvas.addEventListener('mousemove', scratch);
+
+        canvas.addEventListener('touchstart', () => isScratching = true);
+        canvas.addEventListener('touchend', () => isScratching = false);
+        canvas.addEventListener('touchmove', scratch);
+
+        // 2. Event Countdown Logic (Targeting Nov 12, 2026)
+        const eventDate = new Date('November 12, 2026 18:00:00').getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const difference = eventDate - now;
+
+            if (difference > 0) {
+                document.getElementById('days').innerText = Math.floor(difference / (1000 * 60 * 60 * 24));
+                document.getElementById('hours').innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('minutes').innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('seconds').innerText = Math.floor((difference % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+    </script>
+</body>
+          </html>
+  
